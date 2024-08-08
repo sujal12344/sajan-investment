@@ -1,55 +1,44 @@
-import React, { useEffect } from "react";
+// Testimonial.jsx
+import React from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const Testimonials = () => {
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+const testimonials = [
+  {
+    name: "John Doe",
+    feedback: "Outstanding service and incredible insights!",
+  },
+  {
+    name: "Jane Smith",
+    feedback: "Helped me achieve my financial goals quickly and effectively.",
+  },
+  // Add more testimonials if needed
+];
 
-    // Carousel animation
-    gsap.to(".testimonial", {
-      x: "-100%",
-      duration: 10,
-      ease: "none",
-      repeat: -1,
-      scrollTrigger: {
-        trigger: ".testimonials",
-        start: "top",
-        end: "200%",
-        scrub: true,
-        pin: true,
-      },
-    });
-
-    // Quote animation
-    gsap.from(".testimonial-quote", {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      stagger: 0.2,
-    });
+const Testimonial = () => {
+  React.useEffect(() => {
+    gsap.from(".testimonial", { opacity: 0, y: 20, stagger: 0.3, duration: 1 });
   }, []);
 
   return (
-    <section className="testimonials relative h-screen bg-dark">
-      <div className="container mx-auto px-6 h-full flex items-center">
-        <div className="testimonial-container w-full h-full overflow-hidden">
-          <div className="testimonial flex space-x-6">
-            <div className="testimonial-item flex-shrink-0 w-full h-full flex items-center justify-center">
-              <div className="testimonial-quote p-8 bg-gray-800 rounded-lg shadow-lg text-center">
-                <q className="text-lg mb-4">
-                  The investment guidance I received from Sajan Investment has
-                  been invaluable in achieving my financial goals.
-                </q>
-                <p className="text-green-500 font-bold">- John Doe</p>
-              </div>
+    <section className="testimonials py-12 bg-gray-800">
+      <div className="container mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-8">
+          What Our Clients Say
+        </h2>
+        <div className="flex flex-wrap justify-center">
+          {testimonials.map((item, index) => (
+            <div
+              key={index}
+              className="testimonial bg-white text-black p-6 m-4 rounded shadow-lg max-w-xs"
+            >
+              <p className="mb-4">"{item.feedback}"</p>
+              <p className="font-semibold">- {item.name}</p>
             </div>
-            {/* Add more testimonial items */}
-          </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export default Testimonials;
+export default Testimonial;
