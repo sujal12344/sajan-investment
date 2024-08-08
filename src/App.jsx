@@ -1,36 +1,30 @@
-import React, { useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+// App.jsx
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
-import Services from "./Services";
+import Testimonial from "./Testimonial";
+import Products from "./Products";
 import Footer from "./Footer";
-import "./index.css";
+import "./index.css"; // Import TailwindCSS styles
 
-gsap.registerPlugin(ScrollTrigger);
-
-function App() {
-  useEffect(() => {
-    gsap.from(".animate-fade-in", {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      stagger: 0.2,
-      scrollTrigger: {
-        trigger: ".animate-fade-in",
-        start: "top 80%",
-      },
-    });
-  }, []);
-
+const App = () => {
   return (
-    <div className="bg-black text-white min-h-screen">
-      <Navbar />
-      <Hero />
-      <Services />
-      <Footer />
-    </div>
+    <Router>
+      <div className="App bg-black text-white">
+        <Navbar />
+        <Hero />
+        {/* <Switch> */}
+        {/* <Route path="/testimonials" component={Testimonial} />
+        <Route path="/products" component={Products} /> */}
+        <Testimonial />
+        <Products />
+        {/* Additional routes can be added here */}
+        {/* </Switch> */}
+        <Footer />
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
